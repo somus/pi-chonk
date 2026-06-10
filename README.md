@@ -155,3 +155,5 @@ Package dry-run:
 ```bash
 npm pack --dry-run
 ```
+
+Releases use Release Please and npm trusted publishing. Merge Conventional Commits to `main`, then merge the Release Please PR to publish with provenance.
