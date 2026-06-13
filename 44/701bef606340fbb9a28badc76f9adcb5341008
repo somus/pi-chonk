@@ -1,0 +1,19 @@
+.github/workflows/publish.yml
+  s_d57f9a80cb9057::t_a71c045f464f63 19-20,22-23,28-29,35-36
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "44701bef606340fbb9a28badc76f9adcb5341008",
+  "prompts": {},
+  "sessions": {
+    "s_d57f9a80cb9057": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "019ec11a-51c8-72ee-9afe-f89f1ec63a85",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Somasundaram Ayyappan <1802828+somus@users.noreply.github.com>"
+    }
+  }
+}
