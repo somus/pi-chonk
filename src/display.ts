@@ -1,4 +1,4 @@
-import type { ExtensionContext } from "@earendil-works/pi-coding-agent";
+import type { ExtensionContext, Theme } from "@earendil-works/pi-coding-agent";
 import type { Config } from "./config";
 
 export type ChonkUsage = {
@@ -35,11 +35,21 @@ function formatPrefix(config: Config, usage: ChonkUsage): string {
 	return `${usage.tokens === null ? "?" : formatCount(usage.tokens)} `;
 }
 
-export function renderChonk(config: Config, usage: ChonkUsage): string {
+function isDangerStage(index: number, levels: number): boolean {
+	return index >= Math.max(0, levels - 2);
+}
+
+function colorChonkPart(theme: Theme | undefined, index: number, levels: number, text: string): string {
+	if (!theme || text.length === 0) return text;
+	return theme.fg(isDangerStage(index, levels) ? "error" : "success", text);
+}
+
+export function renderChonk(config: Config, usage: ChonkUsage, theme?: Theme): string {
 	const index = chonkIndex(usage.percent, config.icons.length);
 	const icon = config.icons[index] ?? config.icons[0];
 	const label = config.labels[index] ?? config.labels[0];
-	const beforeIcon = formatPrefix(config, usage);
-	const afterIcon = config.showLabel ? `   ${label}` : " ";
-	return `${beforeIcon}${icon}${afterIcon}`;
+	const beforeIcon = theme?.fg("muted", formatPrefix(config, usage)) ?? formatPrefix(config, usage);
+	const coloredIcon = colorChonkPart(theme, index, config.icons.length, icon);
+	const afterIcon = config.showLabel ? `   ${colorChonkPart(theme, index, config.icons.length, label)}` : " ";
+	return `${beforeIcon}${coloredIcon}${afterIcon}`;
 }

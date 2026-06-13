@@ -1,3 +1,4 @@
+import type { Theme } from "@earendil-works/pi-coding-agent";
 import { describe, expect, it } from "vitest";
 import { DEFAULT_CONFIG } from "../src/config";
 import { chonkIndex, formatCount, renderChonk } from "../src/display";
@@ -23,6 +24,12 @@ describe("chonkIndex", () => {
 	});
 });
 
+const theme = {
+	fg(color: string, text: string) {
+		return text ? `[${color}]${text}[/${color}]` : text;
+	},
+} as Theme;
+
 describe("renderChonk", () => {
 	it("renders tokens, icon, and label", () => {
 		expect(renderChonk(DEFAULT_CONFIG, { tokens: 101_000, percent: 37 })).toBe("101k 󡤂   Chonky");
@@ -36,5 +43,17 @@ describe("renderChonk", () => {
 	it("can render percentage as the prefix", () => {
 		const config = { ...DEFAULT_CONFIG, tokenDisplay: "percentage" as const };
 		expect(renderChonk(config, { tokens: 101_000, percent: 37 })).toBe("37% 󡤂   Chonky");
+	});
+
+	it("colors normal stages with success and muted prefix", () => {
+		expect(renderChonk(DEFAULT_CONFIG, { tokens: 101_000, percent: 37 }, theme)).toBe(
+			"[muted]101k [/muted][success]󡤂[/success]   [success]Chonky[/success]",
+		);
+	});
+
+	it("colors the last two stages with danger color", () => {
+		expect(renderChonk(DEFAULT_CONFIG, { tokens: 900_000, percent: 84 }, theme)).toBe(
+			"[muted]900k [/muted][error]󡤅[/error]   [error]Oh lawd[/error]",
+		);
 	});
 });

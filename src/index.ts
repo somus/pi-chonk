@@ -23,7 +23,7 @@ export default function (pi: ExtensionAPI): void {
 			return;
 		}
 
-		if (ctx.hasUI) ctx.ui.setStatus(STATUS_ID, renderChonk(config, getChonkUsage(ctx)));
+		if (ctx.hasUI) ctx.ui.setStatus(STATUS_ID, renderChonk(config, getChonkUsage(ctx), ctx.ui.theme));
 	}
 
 	pi.on("session_start", (_event, ctx) => {
