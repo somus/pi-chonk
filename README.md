@@ -8,6 +8,7 @@ A pi extension that shows context-window fill with a configurable Chonk Chart ca
 - Six increasingly chonky cats mapped across the active model's context window.
 - Optional token-count or percentage prefix.
 - Optional chonk label text.
+- Theme-aware coloring: muted prefix, success chonk states, and error coloring for the last two stages.
 - Configurable labels, icons, and refresh interval.
 - Interactive settings UI.
 - Footer-agnostic integration through Pi extension status.
@@ -120,6 +121,8 @@ Custom footer extensions can include it with:
 ```ts
 footerData.getExtensionStatuses()
 ```
+
+The status text may include safe SGR color sequences from Pi theme tokens. Custom footers should preserve those sequences if they want pi-chonk colors to appear.
 
 ## Package metadata
 
