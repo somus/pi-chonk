@@ -2,6 +2,12 @@
 
 A pi extension that shows context-window fill with a configurable Chonk Chart cat badge.
 
+## Screenshots
+
+| Screenshot 1 | Screenshot 2 |
+| --- | --- |
+| ![pi-chonk screenshot 1](https://raw.githubusercontent.com/somus/pi-chonk/main/assets/screenshot-1.png) | ![pi-chonk screenshot 2](https://raw.githubusercontent.com/somus/pi-chonk/main/assets/screenshot-2.png) |
+
 ## Features
 
 - Footer status showing current context usage.
